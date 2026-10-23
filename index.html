@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2d6b5a" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" content="کارنما — فهرست کارهای شخصی روی همین دستگاه" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="کارنما" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>کارنما</title>
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1 id="viewTitle">امروز</h1>
+      <div class="sub" id="viewSub">—</div>
+    </header>
+
+    <div id="remindBanner" class="banner" role="status">
+      <div id="remindText"></div>
+      <button type="button" class="dismiss" id="remindDismiss">بستن</button>
+    </div>
+
+    <div class="quick-add">
+      <label class="sr-only" for="quickInput">افزودن سریع</label>
+      <input id="quickInput" type="text" placeholder="کار جدید… (نمونه)" autocomplete="off" enterkeyhint="done" />
+      <button type="button" id="quickBtn">افزودن</button>
+    </div>
+
+    <main id="main" aria-live="polite"></main>
+
+    <button type="button" class="fab" id="fab" aria-label="کار جدید">+</button>
+
+    <nav class="tabbar" aria-label="نماها">
+      <button type="button" class="tab" id="tab-inbox" data-view="inbox">
+        <span class="ico">📥</span>
+        <span>صندوق</span>
+      </button>
+      <button type="button" class="tab active" id="tab-today" data-view="today">
+        <span class="ico">☀️</span>
+        <span>امروز</span>
+      </button>
+      <button type="button" class="tab" id="tab-upcoming" data-view="upcoming">
+        <span class="ico">📅</span>
+        <span>آینده</span>
+      </button>
+    </nav>
+  </div>
+
+  <div id="overlay" class="overlay" aria-hidden="true">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <h2 id="sheetTitle">کار جدید</h2>
+      <div class="field">
+        <label for="fTitle">عنوان</label>
+        <input id="fTitle" type="text" maxlength="200" placeholder="چه کاری؟" />
+      </div>
+      <div class="field">
+        <label for="fNote">یادداشت (اختیاری)</label>
+        <textarea id="fNote" maxlength="2000" placeholder="جزئیات…"></textarea>
+      </div>
+      <div class="field">
+        <label>تاریخ شمسی (اختیاری)</label>
+        <input type="hidden" id="fDateKey" value="" />
+        <div class="jpicker">
+          <div class="jpicker-head">
+            <button type="button" id="jpNext" aria-label="ماه بعد">‹</button>
+            <span id="jpMonthLabel">—</span>
+            <button type="button" id="jpPrev" aria-label="ماه قبل">›</button>
+          </div>
+          <div class="jdow">
+            <span>ش</span><span>ی</span><span>د</span><span>س</span><span>چ</span><span>پ</span><span>ج</span>
+          </div>
+          <div class="jdays" id="jdays"></div>
+          <button type="button" class="jpicker-clear" id="jpClear">بدون تاریخ (صندوق ورودی)</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="fTime">ساعت یادآوری (اختیاری)</label>
+        <input id="fTime" type="time" />
+      </div>
+      <div class="sheet-actions">
+        <button type="button" class="danger" id="btnDelete">حذف</button>
+        <button type="button" class="ghost" id="btnCancel">انصراف</button>
+        <button type="button" class="primary" id="btnSave">ذخیره</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
